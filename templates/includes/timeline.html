@@ -1,0 +1,30 @@
+<ol class="timeline"> {# Agrupa a lista cronológica das atualizações do atendimento. #}
+{# Lista cronologicamente as atualizações públicas de situação da manifestação. #}
+  {% for event in timeline %} {# Percorre event in timeline para apresentar um item por registro recebido do servidor. #}
+    <li class="timeline-item"> {# Agrupa uma atualização de situação registrada no histórico. #}
+      <span class="timeline-dot" aria-hidden="true"> {# Agrupa o marcador decorativo da linha do tempo. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+        <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+          {{ event.status_label }} {# Insere a situação registrada nesta etapa do histórico. #}
+        </strong> {# Encerra o destaque textual. #}
+        <time datetime="{{ event.created_at|date:'c' }}"> {# Exibe data e hora com um valor estruturado para leitores e ferramentas do navegador. #}
+          {{ event.created_at|date:'d/m/Y · H:i' }} {# Insere a data desta atualização do atendimento. #}
+        </time> {# Encerra a data e hora. #}
+        {% if event.note %} {# Exibe a observação do histórico somente quando ela foi registrada. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            {{ event.note }} {# Insere a observação pública associada à atualização de situação. #}
+          </p> {# Encerra o parágrafo. #}
+        {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </li> {# Encerra o item da lista. #}
+  {% empty %} {# Apresenta a orientação alternativa quando a lista de registros está vazia. #}
+    <li class="timeline-item"> {# Agrupa uma atualização de situação registrada no histórico. #}
+      <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          O histórico será exibido aqui. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </li> {# Encerra o item da lista. #}
+  {% endfor %} {# Encerra a repetição dos registros recebidos do servidor. #}
+</ol> {# Encerra a lista ordenada. #}

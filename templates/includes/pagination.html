@@ -1,0 +1,27 @@
+{% if page_obj.has_other_pages %} {# Exibe a navegação somente quando há mais de uma página de resultados. #}
+{# Navega pelas páginas preservando os filtros da consulta atual. #}
+  <nav class="pagination" aria-label="Paginação das manifestações"> {# Agrupa os links para navegar entre as páginas de resultados. #}
+    {% if page_obj.has_previous %} {# Oferece a navegação para a página anterior quando ela existe. #}
+      <a class="btn btn-secondary btn-small" href="{% querystring page=page_obj.previous_page_number %}" aria-label="Página anterior"> {# Gera o link de paginação preservando os filtros da consulta atual. #}
+        <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          ← {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        Anterior {# Apresenta este texto ao usuário no contexto da seção. #}
+      </a> {# Encerra o link. #}
+    {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+    <span class="pagination-info" aria-current="page"> {# Agrupa o número da página atual e a quantidade total de páginas. #}
+      Página {# Apresenta este texto ao usuário no contexto da seção. #}
+      {{ page_obj.number }} {# Insere o número da página de resultados exibida. #}
+      de {# Apresenta este texto ao usuário no contexto da seção. #}
+      {{ page_obj.paginator.num_pages }} {# Insere a quantidade total de páginas calculada pelo paginador. #}
+    </span> {# Encerra o trecho de texto ou detalhe visual. #}
+    {% if page_obj.has_next %} {# Oferece a navegação para a próxima página quando ela existe. #}
+      <a class="btn btn-secondary btn-small" href="{% querystring page=page_obj.next_page_number %}" aria-label="Próxima página"> {# Gera o link de paginação preservando os filtros da consulta atual. #}
+        Próxima {# Apresenta este texto ao usuário no contexto da seção. #}
+        <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      </a> {# Encerra o link. #}
+    {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+  </nav> {# Encerra o grupo de navegação. #}
+{% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}

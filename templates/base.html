@@ -1,0 +1,183 @@
+{% load static %} {# Carrega as tags de arquivos estáticos para gerar os endereços de CSS, JavaScript e imagens. #}
+{# Estrutura compartilhada do portal: marca, navegação, mensagens, conteúdo e rodapé. Comentários Django são removidos no servidor e não expõem estas explicações no HTML entregue ao navegador. #}
+<!doctype html> {# Declara o documento como HTML5 para a interpretação correta pelo navegador. #}
+<html lang="pt-BR"> {# Define o idioma português do Brasil para leitura, acessibilidade e tradução. #}
+  <head> {# Agrupa os metadados e os arquivos que a página precisa carregar. #}
+    <meta charset="utf-8"> {# Usa UTF-8 para preservar acentos e caracteres do português. #}
+    <meta name="viewport" content="width=device-width, initial-scale=1"> {# Permite que o layout acompanhe a largura de celulares e outros dispositivos. #}
+    <meta name="description" content="Ouvidoria Campo Real: um espaço de escuta, diálogo e acompanhamento das suas manifestações."> {# Descreve o conteúdo do portal para navegadores e mecanismos de busca. #}
+    <meta name="theme-color" content="#003D59"> {# Informa o azul institucional para a interface do navegador quando houver suporte. #}
+    <title> {# Define o título da aba, permitindo que cada página personalize seu texto. #}
+      {% block title %} {# Inicia o bloco title, que esta página fornece à estrutura base. #}
+        Ouvidoria Campo Real {# Apresenta este texto ao usuário no contexto da seção. #}
+      {% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}
+    </title> {# Encerra o título exibido na aba. #}
+    <link rel="stylesheet" href="{% static 'css/site.css' %}"> {# Carrega o CSS local com as cores, o layout e os componentes do portal. #}
+    <script src="{% static 'js/site.js' %}" defer> {# Carrega o JavaScript local após o HTML, mantendo as melhorias opcionais de interface. #}
+    </script> {# Encerra o elemento script. #}
+  </head> {# Encerra o cabeçalho de metadados. #}
+  <body> {# Inicia a parte visível da página. #}
+    <a class="skip-link" href="#conteudo"> {# Oferece um atalho de teclado para pular a navegação e chegar ao conteúdo. #}
+      Pular para o conteúdo {# Apresenta este texto ao usuário no contexto da seção. #}
+    </a> {# Encerra o link. #}
+    <div class="utility-bar"> {# Agrupa a faixa superior com a identificação do canal. #}
+      <div class="container utility-inner"> {# Agrupa o conteúdo da faixa superior dentro da largura da página. #}
+        <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          CAMPO REAL {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span class="utility-divider"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            / {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          OUVIDORIA {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          Escuta que aproxima. Diálogo que transforma. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+    <header class="site-header"> {# Agrupa o cabeçalho com marca, navegação e acesso à conta. #}
+      <div class="container header-inner"> {# Agrupa os itens do cabeçalho em uma linha adaptável. #}
+        <a class="brand {% if brand_logos_available %}brand-official{% endif %}" href="{% url 'ombudsman:home' %}" aria-label="Ouvidoria Campo Real — início"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          {% if brand_logos_available %} {# Verifica se os dois arquivos originais de logo estão disponíveis antes de gerar imagens. #}
+            <img class="brand-logo brand-logo-header" src="{% static 'img/camporeal-azul.png' %}" alt="Centro Universitário Campo Real" width="340" height="166"> {# Carrega o arquivo original azul da Campo Real no fundo branco, com texto alternativo e proporção preservada. #}
+            <span class="brand-portal-label"> {# Agrupa o nome Ouvidoria separado da arte original da instituição. #}
+              Ouvidoria {# Apresenta este texto ao usuário no contexto da seção. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+            <span class="brand-text"> {# Agrupa a identificação textual usada enquanto os arquivos originais não estão disponíveis. #}
+              <span class="brand-name"> {# Agrupa o nome institucional exibido como texto de apoio. #}
+                CAMPO REAL {# Apresenta este texto ao usuário no contexto da seção. #}
+              </span> {# Encerra o trecho de texto ou detalhe visual. #}
+              <span class="brand-subtitle"> {# Agrupa a identificação do canal de ouvidoria. #}
+                OUVIDORIA {# Apresenta este texto ao usuário no contexto da seção. #}
+              </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+        </a> {# Encerra o link. #}
+        <button type="button" class="nav-toggle" data-nav-toggle aria-controls="main-nav" aria-expanded="false" aria-label="Abrir menu"> {# Controla o menu móvel e comunica o estado aberto ou fechado às tecnologias assistivas. #}
+          <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </button> {# Encerra o botão. #}
+        <nav class="main-nav" id="main-nav" data-nav-menu aria-label="Navegação principal"> {# Agrupa os links principais do portal. #}
+          <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'ombudsman:home' %}" {% if request.resolver_match.url_name == 'home' %}aria-current="page"{% endif %}> {# Gera o link de navegação e sinaliza quando esta é a página atual. #}
+            Início {# Apresenta este texto ao usuário no contexto da seção. #}
+          </a> {# Encerra o link. #}
+          <a class="nav-link {% if request.resolver_match.url_name == 'create' or request.resolver_match.url_name == 'student_dashboard' %}active{% endif %}" href="{% url 'ombudsman:student_dashboard' %}" {% if request.resolver_match.url_name == 'create' or request.resolver_match.url_name == 'student_dashboard' %}aria-current="page"{% endif %}> {# Gera o link de navegação e sinaliza quando esta é a página atual. #}
+            Ouvidoria {# Apresenta este texto ao usuário no contexto da seção. #}
+          </a> {# Encerra o link. #}
+          <a class="nav-link {% if request.resolver_match.url_name == 'track' %}active{% endif %}" href="{% url 'ombudsman:track' %}" {% if request.resolver_match.url_name == 'track' %}aria-current="page"{% endif %}> {# Gera o link de navegação e sinaliza quando esta é a página atual. #}
+            Acompanhar {# Apresenta este texto ao usuário no contexto da seção. #}
+          </a> {# Encerra o link. #}
+          <a class="nav-link {% if request.resolver_match.url_name == 'staff_dashboard' or request.resolver_match.url_name == 'staff_detail' %}active{% endif %}" href="{% url 'ombudsman:staff_dashboard' %}" {% if request.resolver_match.url_name == 'staff_dashboard' or request.resolver_match.url_name == 'staff_detail' %}aria-current="page"{% endif %}> {# Gera o link de navegação e sinaliza quando esta é a página atual. #}
+            Administração {# Apresenta este texto ao usuário no contexto da seção. #}
+          </a> {# Encerra o link. #}
+        </nav> {# Encerra o grupo de navegação. #}
+        <div class="header-actions"> {# Agrupa as ações de acesso ou saída da conta conectada. #}
+          {% if user.is_authenticated %} {# Mostra as ações da conta somente quando há uma sessão autenticada; as views validam o acesso. #}
+            <span class="header-user"> {# Agrupa a saudação à pessoa conectada. #}
+              Olá, {# Apresenta este texto ao usuário no contexto da seção. #}
+              {{ user.first_name|default:'bem-vindo' }} {# Insere o primeiro nome da pessoa conectada, com alternativa quando não informado. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            <form method="post" action="{% url 'accounts:logout' %}"> {# Encerra a sessão por POST, evitando saída acionada por um simples link externo. #}
+              {% csrf_token %} {# Insere o token CSRF exigido para validar este envio POST e impedir requisições forjadas. #}
+              <button class="btn btn-secondary btn-small" type="submit"> {# Envia o formulário ao servidor para validação e processamento da ação indicada. #}
+                Sair {# Apresenta este texto ao usuário no contexto da seção. #}
+                <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+                  → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+                </span> {# Encerra o trecho de texto ou detalhe visual. #}
+              </button> {# Encerra o botão. #}
+            </form> {# Encerra o formulário. #}
+          {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+            <a class="btn btn-primary btn-small" href="{% url 'accounts:login' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+              Acessar portal {# Apresenta este texto ao usuário no contexto da seção. #}
+              <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+                → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+              </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            </a> {# Encerra o link. #}
+          {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </header> {# Encerra o cabeçalho visual. #}
+    <main id="conteudo"> {# Define o conteúdo principal e o destino do atalho de acessibilidade. #}
+      {% if messages %} {# Exibe os avisos temporários da requisição quando eles existirem. #}
+        <div class="container messages" aria-live="polite"> {# Agrupa as mensagens temporárias geradas pelo servidor. #}
+          {% for message in messages %} {# Percorre message in messages para apresentar um item por registro recebido do servidor. #}
+            <div class="notice notice-{{ message.tags|default:'info' }}" role="status"> {# Agrupa uma mensagem de orientação, confirmação ou erro. #}
+              {{ message }} {# Insere o texto da mensagem temporária gerada pelo servidor. #}
+            </div> {# Encerra o agrupamento de conteúdo. #}
+          {% endfor %} {# Encerra a repetição dos registros recebidos do servidor. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+      {% block content %} {# Inicia o bloco content, que esta página fornece à estrutura base. #}
+      {% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}
+    </main> {# Encerra o conteúdo principal. #}
+    <footer class="site-footer"> {# Agrupa o rodapé institucional compartilhado entre as páginas. #}
+      <div class="container footer-grid"> {# Agrupa a grade com marca, atalhos e orientações do rodapé. #}
+        <div class="footer-brand"> {# Agrupa a marca e a apresentação do canal no rodapé. #}
+          <a class="brand {% if brand_logos_available %}brand-official{% endif %}" href="{% url 'ombudsman:home' %}" aria-label="Ouvidoria Campo Real — início"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+            {% if brand_logos_available %} {# Verifica se os dois arquivos originais de logo estão disponíveis antes de gerar imagens. #}
+              <img class="brand-logo brand-logo-footer" src="{% static 'img/camporeal-branca.png' %}" alt="Centro Universitário Campo Real" width="340" height="166" loading="lazy"> {# Carrega o arquivo original branco da Campo Real no rodapé azul, sem alterar a arte da marca. #}
+              <span class="brand-portal-label"> {# Agrupa o nome Ouvidoria separado da arte original da instituição. #}
+                Ouvidoria {# Apresenta este texto ao usuário no contexto da seção. #}
+              </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+              <span class="brand-text"> {# Agrupa a identificação textual usada enquanto os arquivos originais não estão disponíveis. #}
+                <span class="brand-name"> {# Agrupa o nome institucional exibido como texto de apoio. #}
+                  CAMPO REAL {# Apresenta este texto ao usuário no contexto da seção. #}
+                </span> {# Encerra o trecho de texto ou detalhe visual. #}
+                <span class="brand-subtitle"> {# Agrupa a identificação do canal de ouvidoria. #}
+                  OUVIDORIA {# Apresenta este texto ao usuário no contexto da seção. #}
+                </span> {# Encerra o trecho de texto ou detalhe visual. #}
+              </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+          </a> {# Encerra o link. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Um canal para construir, juntos, {# Apresenta este texto ao usuário no contexto da seção. #}
+            <br> {# Define a quebra de linha intencional neste trecho de apresentação. #}
+            uma experiência acadêmica melhor. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="footer-nav"> {# Agrupa os atalhos de navegação do rodapé. #}
+          <span class="footer-title"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            Seu espaço de escuta {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <a href="{% url 'ombudsman:create' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+            Fazer uma manifestação {# Apresenta este texto ao usuário no contexto da seção. #}
+          </a> {# Encerra o link. #}
+          <a href="{% url 'ombudsman:track' %}" {% if request.resolver_match.url_name == 'track' %}aria-current="page"{% endif %}> {# Gera o link de navegação e sinaliza quando esta é a página atual. #}
+            Acompanhar protocolo {# Apresenta este texto ao usuário no contexto da seção. #}
+          </a> {# Encerra o link. #}
+          <a href="{% url 'ombudsman:staff_dashboard' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+            Área administrativa {# Apresenta este texto ao usuário no contexto da seção. #}
+          </a> {# Encerra o link. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="footer-note"> {# Agrupa a orientação sobre responsabilidade e acesso restrito. #}
+          <span class="footer-title"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            Diálogo com responsabilidade {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            As manifestações são tratadas com cuidado e acesso restrito. Consulte as informações de sigilo antes de enviar. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+          <span class="footer-project"> {# Agrupa a identificação de que o portal é um projeto acadêmico. #}
+            Projeto acadêmico · TCC {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <div class="container footer-bottom"> {# Agrupa os créditos e o ano exibidos ao final da página. #}
+        <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          © {# Apresenta este texto ao usuário no contexto da seção. #}
+          {% now 'Y' %} {# Insere o ano atual nos créditos do projeto. #}
+          Ouvidoria Campo Real · Projeto acadêmico {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          Feito para ouvir você {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span class="yellow-dot" aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </footer> {# Encerra o rodapé. #}
+  </body> {# Encerra o corpo da página. #}
+</html> {# Encerra o documento HTML. #}

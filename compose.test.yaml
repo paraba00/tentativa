@@ -1,0 +1,56 @@
+# Nome separado impede que a limpeza dos testes alcance os containers da aplicação.
+name: camporeal-ouvidoria-tests
+# Este conjunto possui seu próprio MySQL e um executor de comandos do Django.
+services:
+  # Banco descartável usado exclusivamente durante as verificações.
+  db-test:
+    # Mantém a mesma versão principal do banco da demonstração.
+    image: mysql:8.4
+    # A imagem oficial lê estas opções ao inicializar seu diretório de dados.
+    environment:
+      # Reutiliza o segredo local sem incluir seu valor no arquivo versionado.
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Execute python3 scripts/init_env.py}
+      # Permite ao executor de testes criar/remover seu banco por esta rede interna isolada.
+      MYSQL_ROOT_HOST: "%"
+      # Nome base do banco de testes; não coincide com o banco da aplicação.
+      MYSQL_DATABASE: ouvidoria_tests
+    # Os dados ficam em memória e são descartados junto com este container.
+    tmpfs:
+      # Substitui apenas o diretório de dados do banco de testes.
+      - /var/lib/mysql
+    # Aguarda uma consulta autenticada antes de liberar o executor.
+    healthcheck:
+      # A senha só é expandida dentro do container, sem aparecer como argumento do mysql.
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_ROOT_PASSWORD mysql -h 127.0.0.1 -u root -e 'SELECT 1' >/dev/null"]
+      # Consulta a prontidão a cada três segundos.
+      interval: 3s
+      # Limita a espera de cada consulta a cinco segundos.
+      timeout: 5s
+      # Concede tempo para a instalação inicial das tabelas do MySQL.
+      retries: 40
+  # Executor efêmero: scripts/check.sh lhe passa check, makemigrations ou test.
+  test:
+    # Testa a mesma imagem da aplicação, sem instalar uma implementação diferente.
+    image: tentativa-ouvidoria:dev
+    # Estas variáveis apontam para o banco temporário e ativam opções de teste local.
+    environment:
+      # Habilita a configuração de desenvolvimento necessária aos cenários locais.
+      DJANGO_DEBUG: "true"
+      # Confirma que a suíte exercita MySQL real, em vez da alternativa SQLite.
+      DB_ENGINE: mysql
+      # Resolve o nome do container temporário na rede deste conjunto.
+      DB_HOST: db-test
+      # Seleciona o banco temporário definido no serviço acima.
+      DB_NAME: ouvidoria_tests
+      # Root é usado só aqui para criar/remover o banco de teste do Django.
+      DB_USER: root
+      # O valor vem do .env privado, não de uma senha padrão gravada neste YAML.
+      DB_PASSWORD: ${DB_ROOT_PASSWORD:?Execute python3 scripts/init_env.py}
+      # Guarda e-mails em memória para fazer assertions sem enviar mensagens reais.
+      EMAIL_BACKEND: django.core.mail.backends.locmem.EmailBackend
+    # Não roda comandos de teste enquanto o MySQL ainda estiver inicializando.
+    depends_on:
+      # Refere-se ao serviço temporário, nunca ao db da aplicação.
+      db-test:
+        # Exige sucesso no healthcheck antes de iniciar o executor.
+        condition: service_healthy

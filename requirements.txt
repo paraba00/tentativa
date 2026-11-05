@@ -1,0 +1,12 @@
+# Framework que fornece rotas, modelos, formulários, sessões e proteção CSRF.
+Django==5.2.19
+# Integração OAuth com Google; o extra socialaccount instala as dependências sociais.
+django-allauth[socialaccount]==65.21.1
+# Driver que conecta o backend MySQL do Django ao banco de dados.
+mysqlclient==2.3.0
+# Servidor WSGI que atende a aplicação dentro do container.
+gunicorn==23.0.0
+# Entrega os arquivos estáticos coletados, com suporte a compressão e manifesto.
+whitenoise==6.12.0
+# Carrega as configurações do arquivo privado .env durante o desenvolvimento.
+python-dotenv==1.2.4

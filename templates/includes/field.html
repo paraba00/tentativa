@@ -1,0 +1,68 @@
+{% if field.field.widget.input_type == 'radio' %} {# Avalia a condição field.field.widget.input_type == 'radio' para decidir o trecho que será apresentado. #}
+{# Componente de campo acessível, com rótulo, widget, ajuda, obrigatoriedade e erros retornados pelo formulário. #}
+  <fieldset class="form-field radio-field"> {# Agrupa opções relacionadas de forma acessível para navegação e leitores de tela. #}
+    <legend> {# Apresenta o nome acessível do grupo de opções. #}
+      {{ field.label }} {# Insere o nome legível do campo definido no formulário. #}
+      {% if field.field.required %} {# Indica os campos cujo preenchimento é obrigatório no servidor. #}
+        <span class="required-mark" aria-hidden="true"> {# Agrupa o indicador visual de preenchimento obrigatório. #}
+          * {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+    </legend> {# Encerra o título do grupo de campos. #}
+    {{ field }} {# Insere o widget do campo, preservando valores e erros vinculados ao formulário. #}
+    {% if field.help_text %} {# Mostra a ajuda do campo quando o formulário a definiu. #}
+      <div class="field-help" id="{{ field.auto_id }}_helptext"> {# Agrupa a ajuda do campo definida pelo formulário no servidor. #}
+        {{ field.help_text|safe }} {# Insere a ajuda confiável definida no formulário; safe não é usado nos relatos de usuários. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+    {% if field.errors %} {# Mostra os erros específicos deste campo quando a validação falhou. #}
+      <ul class="field-errors" id="{{ field.auto_id }}_error" role="alert"> {# Agrupa os erros de validação associados ao campo. #}
+        {% for error in field.errors %} {# Percorre error in field.errors para apresentar um item por registro recebido do servidor. #}
+          <li> {# Abre um item da lista apresentada nesta seção. #}
+            {{ error }} {# Insere o texto de um erro de validação devolvido pelo formulário. #}
+          </li> {# Encerra o item da lista. #}
+        {% endfor %} {# Encerra a repetição dos registros recebidos do servidor. #}
+      </ul> {# Encerra a lista sem ordenação. #}
+    {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+  </fieldset> {# Encerra o grupo acessível de opções. #}
+{% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+  <div class="form-field {% if field.field.widget.input_type == 'checkbox' %}checkbox-field{% endif %}"> {# Agrupa um campo com rótulo, entrada e eventuais mensagens de validação. #}
+    {% if field.field.widget.input_type == 'checkbox' %} {# Avalia a condição field.field.widget.input_type == 'checkbox' para decidir o trecho que será apresentado. #}
+      <label for="{{ field.id_for_label }}"> {# Associa o texto do rótulo à entrada pelo identificador do campo. #}
+        {{ field }} {# Insere o widget do campo, preservando valores e erros vinculados ao formulário. #}
+        <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          {{ field.label }} {# Insere o nome legível do campo definido no formulário. #}
+          {% if field.field.required %} {# Indica os campos cujo preenchimento é obrigatório no servidor. #}
+            <span class="required-mark" aria-hidden="true"> {# Agrupa o indicador visual de preenchimento obrigatório. #}
+              * {# Apresenta este texto ao usuário no contexto da seção. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      </label> {# Encerra o rótulo do campo. #}
+    {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+      <label for="{{ field.id_for_label }}"> {# Associa o texto do rótulo à entrada pelo identificador do campo. #}
+        {{ field.label }} {# Insere o nome legível do campo definido no formulário. #}
+        {% if field.field.required %} {# Indica os campos cujo preenchimento é obrigatório no servidor. #}
+          <span class="required-mark" aria-hidden="true"> {# Agrupa o indicador visual de preenchimento obrigatório. #}
+            * {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+      </label> {# Encerra o rótulo do campo. #}
+      {{ field }} {# Insere o widget do campo, preservando valores e erros vinculados ao formulário. #}
+    {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+    {% if field.help_text %} {# Mostra a ajuda do campo quando o formulário a definiu. #}
+      <div class="field-help" id="{{ field.auto_id }}_helptext"> {# Agrupa a ajuda do campo definida pelo formulário no servidor. #}
+        {{ field.help_text|safe }} {# Insere a ajuda confiável definida no formulário; safe não é usado nos relatos de usuários. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+    {% if field.errors %} {# Mostra os erros específicos deste campo quando a validação falhou. #}
+      <ul class="field-errors" id="{{ field.auto_id }}_error" role="alert"> {# Agrupa os erros de validação associados ao campo. #}
+        {% for error in field.errors %} {# Percorre error in field.errors para apresentar um item por registro recebido do servidor. #}
+          <li> {# Abre um item da lista apresentada nesta seção. #}
+            {{ error }} {# Insere o texto de um erro de validação devolvido pelo formulário. #}
+          </li> {# Encerra o item da lista. #}
+        {% endfor %} {# Encerra a repetição dos registros recebidos do servidor. #}
+      </ul> {# Encerra a lista sem ordenação. #}
+    {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+  </div> {# Encerra o agrupamento de conteúdo. #}
+{% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}

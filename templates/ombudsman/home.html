@@ -1,0 +1,335 @@
+{% extends 'base.html' %} {# Reutiliza a estrutura do template base e preenche os blocos definidos nesta página. #}
+{# Página inicial com apresentação, tipos de manifestação e explicação transparente do sigilo. #}
+{% load static %} {# Carrega as tags de arquivos estáticos para gerar os endereços de CSS, JavaScript e imagens. #}
+{% block title %} {# Inicia o bloco title, que esta página fornece à estrutura base. #}
+  Sua voz importa · Ouvidoria Campo Real {# Apresenta este texto ao usuário no contexto da seção. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}
+{% block content %} {# Inicia o bloco content, que esta página fornece à estrutura base. #}
+  <section class="hero-section"> {# Agrupa a área de apresentação principal da página inicial. #}
+    <div class="container hero"> {# Agrupa a composição do texto de abertura com a ilustração do campus. #}
+      <div class="hero-content"> {# Agrupa o título, a apresentação e as ações de abertura. #}
+        <span class="eyebrow"> {# Agrupa o identificador curto da área ou da etapa atual. #}
+          <span class="yellow-dot" aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          OUVIDORIA CAMPO REAL {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <h1> {# Apresenta um título de nível 1 para organizar a hierarquia do conteúdo. #}
+          Uma escuta que faz {# Apresenta este texto ao usuário no contexto da seção. #}
+          <br> {# Define a quebra de linha intencional neste trecho de apresentação. #}
+          a {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span class="heading-accent"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            diferença. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </h1> {# Encerra o título principal. #}
+        <p class="hero-description"> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Sua experiência importa. Compartilhe ideias, registre uma manifestação e ajude a transformar a nossa comunidade acadêmica. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+        <div class="hero-actions"> {# Agrupa os botões que iniciam o envio ou o acompanhamento. #}
+          <a class="btn btn-primary" href="{% url 'ombudsman:create' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+            Fazer uma manifestação {# Apresenta este texto ao usuário no contexto da seção. #}
+            <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </a> {# Encerra o link. #}
+          <a class="btn btn-secondary" href="{% url 'ombudsman:track' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+            Acompanhar protocolo {# Apresenta este texto ao usuário no contexto da seção. #}
+            <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </a> {# Encerra o link. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="hero-note"> {# Agrupa a orientação curta sobre sigilo e responsabilidade. #}
+          <svg width="18" height="20" viewBox="0 0 20 22" fill="none" aria-hidden="true"> {# Define um desenho vetorial local que acompanha a cor do componente e dispensa imagens externas. #}
+            <path d="m10 2 7 3v6c0 4-4 7-7 9-3-2-7-5-7-9V5l7-3Z" stroke="currentColor" stroke-width="1.5"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+            <path d="m6 10 3 3 5-5" stroke="currentColor" stroke-width="1.5"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+          </svg> {# Encerra a ilustração vetorial. #}
+          <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            Um espaço de respeito, sigilo e responsabilidade. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <div class="hero-art" aria-hidden="true"> {# Agrupa a ilustração decorativa, sem transmitir dados de usuários. #}
+        <span class="art-orbit art-orbit-one"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <span class="art-orbit art-orbit-two"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <img class="campus-illustration" src="{% static 'img/hero-campus.svg' %}" alt="" width="620" height="460"> {# Carrega a ilustração local e reserva suas dimensões para estabilizar o layout. #}
+        <div class="floating-tag floating-tag-top"> {# Agrupa um destaque decorativo da apresentação. #}
+          <span class="tag-dot"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          Sua participação transforma {# Apresenta este texto ao usuário no contexto da seção. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="voice-card"> {# Agrupa o cartão visual que reforça a proposta de escuta. #}
+          <span class="voice-icon"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"> {# Define um desenho vetorial local que acompanha a cor do componente e dispensa imagens externas. #}
+              <path d="M22 4H6a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h3l5 4v-4h8a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Z" stroke="currentColor" stroke-width="1.8"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+              <path d="M8 10h12M8 15h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+            </svg> {# Encerra a ilustração vetorial. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+            <span class="voice-label"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              UM ESPAÇO DE CONFIANÇA {# Apresenta este texto ao usuário no contexto da seção. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            <strong class="voice-title"> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+              Sua voz importa. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </strong> {# Encerra o destaque textual. #}
+            <span class="voice-copy"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              Escuta, acolhimento e diálogo. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="floating-tag floating-tag-bottom"> {# Agrupa um destaque decorativo da apresentação. #}
+          <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            ✓ {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          Acompanhe cada etapa {# Apresenta este texto ao usuário no contexto da seção. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <span class="art-spark" aria-hidden="true"> {# Agrupa o detalhe vetorial de oito raios que herda o amarelo institucional. #}
+          <svg width="35" height="35" viewBox="0 0 36 36" fill="none"> {# Define um desenho vetorial local que acompanha a cor do componente e dispensa imagens externas. #}
+            <path d="M18 3v30M3 18h30M7.4 7.4l21.2 21.2M7.4 28.6 28.6 7.4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+          </svg> {# Encerra a ilustração vetorial. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </section> {# Encerra a seção de conteúdo. #}
+  <section class="section categories-section" id="ouvidoria"> {# Agrupa a seção com os tipos de manifestação disponíveis. #}
+    <div class="container"> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+      <div class="section-header"> {# Agrupa o título e a apresentação de uma seção. #}
+        <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+          <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+            ESTAMOS AQUI PARA OUVIR {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+            Como podemos ajudar? {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h2> {# Encerra o título da seção. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Cada manifestação é uma oportunidade {# Apresenta este texto ao usuário no contexto da seção. #}
+          <br> {# Define a quebra de linha intencional neste trecho de apresentação. #}
+          de fazer a Campo Real crescer. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <div class="card-grid categories-grid"> {# Agrupa os cartões de entrada para cada tipo de manifestação. #}
+        <a class="card category-card" href="{% url 'ombudsman:create' %}?category=complaint"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          <span class="category-icon" aria-hidden="true"> {# Agrupa a ilustração vetorial do tipo de manifestação. #}
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"> {# Define um desenho vetorial local que acompanha a cor do componente e dispensa imagens externas. #}
+              <path d="M22 4H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h3l5 3v-3h8a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Z" stroke="currentColor" stroke-width="1.7"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+              <path d="M14 9v6m0 3v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+            </svg> {# Encerra a ilustração vetorial. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+            Reclamação e crítica {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h3> {# Encerra o subtítulo. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Conte o que pode melhorar na sua experiência. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+          <span class="card-link"> {# Agrupa a indicação visual de que o cartão pode ser acessado. #}
+            Quero ser ouvido {# Apresenta este texto ao usuário no contexto da seção. #}
+            <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </a> {# Encerra o link. #}
+        <a class="card category-card" href="{% url 'ombudsman:create' %}?category=suggestion"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          <span class="category-icon" aria-hidden="true"> {# Agrupa a ilustração vetorial do tipo de manifestação. #}
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"> {# Define um desenho vetorial local que acompanha a cor do componente e dispensa imagens externas. #}
+              <path d="M10 20c0-4-5-4-5-10a9 9 0 0 1 18 0c0 6-5 6-5 10H10Zm1 4h6m-3-22V0M3 5 1 3m24 2 2-2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+              <path d="m11 11 3 3 3-3m-3 3v6" stroke="currentColor" stroke-width="1.7"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+            </svg> {# Encerra a ilustração vetorial. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+            Sugestão {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h3> {# Encerra o subtítulo. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Compartilhe uma ideia para construir o próximo passo. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+          <span class="card-link"> {# Agrupa a indicação visual de que o cartão pode ser acessado. #}
+            Compartilhar ideia {# Apresenta este texto ao usuário no contexto da seção. #}
+            <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </a> {# Encerra o link. #}
+        <a class="card category-card" href="{% url 'ombudsman:create' %}?category=praise"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          <span class="category-icon" aria-hidden="true"> {# Agrupa a ilustração vetorial do tipo de manifestação. #}
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"> {# Define um desenho vetorial local que acompanha a cor do componente e dispensa imagens externas. #}
+              <path d="M14 24 3 13C-3 5 7-2 14 6c7-8 17-1 11 7L14 24Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+            </svg> {# Encerra a ilustração vetorial. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+            Elogio {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h3> {# Encerra o subtítulo. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Reconheça quem faz a diferença no seu dia a dia. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+          <span class="card-link"> {# Agrupa a indicação visual de que o cartão pode ser acessado. #}
+            Registrar elogio {# Apresenta este texto ao usuário no contexto da seção. #}
+            <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </a> {# Encerra o link. #}
+        <a class="card category-card" href="{% url 'ombudsman:create' %}?category=request"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          <span class="category-icon" aria-hidden="true"> {# Agrupa a ilustração vetorial do tipo de manifestação. #}
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"> {# Define um desenho vetorial local que acompanha a cor do componente e dispensa imagens externas. #}
+              <path d="M6 3h12l5 5v17H6V3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+              <path d="M17 3v6h6M10 14h9m-9 5h7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+            </svg> {# Encerra a ilustração vetorial. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+            Solicitação {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h3> {# Encerra o subtítulo. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Apresente uma necessidade à nossa ouvidoria. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+          <span class="card-link"> {# Agrupa a indicação visual de que o cartão pode ser acessado. #}
+            Fazer solicitação {# Apresenta este texto ao usuário no contexto da seção. #}
+            <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </a> {# Encerra o link. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </section> {# Encerra a seção de conteúdo. #}
+  <section class="section how-section"> {# Abre o elemento section para organizar o conteúdo desta seção. #}
+    <div class="container"> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+      <div class="section-heading centered"> {# Agrupa o título e o texto de introdução de uma seção. #}
+        <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+          SIMPLES, DO INÍCIO AO FIM {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+          Do seu relato ao acompanhamento. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </h2> {# Encerra o título da seção. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Um caminho claro para que a sua voz chegue ao lugar certo. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <div class="steps-grid"> {# Agrupa as três etapas para usar o serviço. #}
+        <article class="step"> {# Agrupa uma etapa do fluxo de acesso, envio e acompanhamento. #}
+          <span class="step-number"> {# Agrupa a numeração da etapa apresentada. #}
+            01 {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+            Acesse com o Google institucional {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h3> {# Encerra o subtítulo. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Entre com a conta Google da faculdade, com domínio {# Apresenta este texto ao usuário no contexto da seção. #}
+            <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+              @camporeal.edu.br {# Apresenta este texto ao usuário no contexto da seção. #}
+            </strong> {# Encerra o destaque textual. #}
+            . {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+        </article> {# Encerra o bloco de conteúdo independente. #}
+        <article class="step"> {# Agrupa uma etapa do fluxo de acesso, envio e acompanhamento. #}
+          <span class="step-number"> {# Agrupa a numeração da etapa apresentada. #}
+            02 {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+            Conte a sua experiência {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h3> {# Encerra o subtítulo. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Escolha o assunto, descreva o que aconteceu e decida entre envio identificado ou sigiloso. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+        </article> {# Encerra o bloco de conteúdo independente. #}
+        <article class="step"> {# Agrupa uma etapa do fluxo de acesso, envio e acompanhamento. #}
+          <span class="step-number"> {# Agrupa a numeração da etapa apresentada. #}
+            03 {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+            Acompanhe a resposta {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h3> {# Encerra o subtítulo. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Guarde seu protocolo e acompanhe o andamento e as respostas no seu espaço. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+        </article> {# Encerra o bloco de conteúdo independente. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </section> {# Encerra a seção de conteúdo. #}
+  <section class="section privacy-section"> {# Abre o elemento section para organizar o conteúdo desta seção. #}
+    <div class="container privacy-grid"> {# Agrupa a apresentação das opções de identificação e suas condições. #}
+      <div class="privacy-copy"> {# Agrupa o texto que apresenta o compromisso de transparência. #}
+        <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+          TRANSPARÊNCIA EM CADA ETAPA {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+          Sua confiança merece {# Apresenta este texto ao usuário no contexto da seção. #}
+          <br> {# Define a quebra de linha intencional neste trecho de apresentação. #}
+          cuidado e clareza. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </h2> {# Encerra o título da seção. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Você escolhe como deseja ser identificado. E sabe, antes de enviar, quem poderá acessar os seus dados. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+        <a class="text-link" href="{% url 'ombudsman:create' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          Conhecer as opções de envio {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </a> {# Encerra o link. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <div class="privacy-points"> {# Agrupa as explicações sobre identificação, sigilo e acesso institucional. #}
+        <div class="privacy-point"> {# Agrupa uma condição de tratamento da identidade do estudante. #}
+          <span class="privacy-point-icon" aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            01 {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+            <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+              Identificado {# Apresenta este texto ao usuário no contexto da seção. #}
+            </h3> {# Encerra o subtítulo. #}
+            <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+              Seu nome e e-mail ficam disponíveis para a equipe responsável pelo atendimento. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </p> {# Encerra o parágrafo. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="privacy-point"> {# Agrupa uma condição de tratamento da identidade do estudante. #}
+          <span class="privacy-point-icon" aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            02 {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+            <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+              Sigiloso {# Apresenta este texto ao usuário no contexto da seção. #}
+            </h3> {# Encerra o subtítulo. #}
+            <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+              A equipe da ouvidoria não visualiza sua identidade. Apenas o perfil de diretor pode consultá-la, em situações excepcionais, com justificativa registrada. Não é anonimato absoluto. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </p> {# Encerra o parágrafo. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="privacy-point"> {# Agrupa uma condição de tratamento da identidade do estudante. #}
+          <span class="privacy-point-icon" aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            03 {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+            <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+              Acesso institucional {# Apresenta este texto ao usuário no contexto da seção. #}
+            </h3> {# Encerra o subtítulo. #}
+            <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+              Nas duas opções, o acesso exige uma conta com e-mail institucional verificado. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </p> {# Encerra o parágrafo. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </section> {# Encerra a seção de conteúdo. #}
+  <section class="section cta-section"> {# Abre o elemento section para organizar o conteúdo desta seção. #}
+    <div class="container"> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+      <div class="cta-banner"> {# Agrupa o convite final para registrar uma manifestação. #}
+        <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+          <span class="eyebrow"> {# Agrupa o identificador curto da área ou da etapa atual. #}
+            VAMOS CONVERSAR? {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+            Uma Campo Real melhor {# Apresenta este texto ao usuário no contexto da seção. #}
+            <br> {# Define a quebra de linha intencional neste trecho de apresentação. #}
+            também começa com você. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h2> {# Encerra o título da seção. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <a class="btn btn-light" href="{% url 'ombudsman:create' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          Fazer uma manifestação {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </a> {# Encerra o link. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </section> {# Encerra a seção de conteúdo. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}

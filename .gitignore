@@ -1,0 +1,30 @@
+# Dependências locais são reinstaláveis; não fazem parte do código do TCC.
+.venv/
+# Configuração e chaves privadas nunca devem ser versionadas.
+.env
+# Também protege variações como .env.demo que contêm senhas de demonstração.
+.env.*
+# Abre uma exceção apenas para o modelo público, que não contém segredos.
+!.env.example
+# Cache de módulos importados pelo Python.
+__pycache__/
+# Arquivos compilados/temporários de Python, sem informação nova de código.
+*.py[cod]
+# Banco SQLite opcional gerado localmente; o fluxo principal usa MySQL.
+*.sqlite3
+# Saída produzida pelo collectstatic; as fontes ficam em static/.
+staticfiles/
+# Arquivos enviados por usuários, caso uploads sejam adicionados no futuro.
+media/
+# Dados locais de medição de cobertura de testes.
+.coverage
+# Relatório HTML de cobertura, que pode ser regenerado.
+htmlcov/
+# Cache do pytest caso seja usado como ferramenta adicional.
+.pytest_cache/
+# Logs locais podem conter informações de operação e não são código-fonte.
+*.log
+# Metadado criado pelo explorador de arquivos do macOS.
+.DS_Store
+# Capturas do navegador são geradas pelos testes e empacotadas separadamente.
+artifacts/

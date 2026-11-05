@@ -1,0 +1,33 @@
+{% for reply in replies %} {# Percorre reply in replies para apresentar um item por registro recebido do servidor. #}
+{# Apresenta as respostas da ouvidoria com identificação funcional e texto escapado. #}
+  <article class="reply"> {# Agrupa uma resposta publicada pela equipe da ouvidoria. #}
+    <div class="reply-header"> {# Agrupa a identificação funcional de quem respondeu e a data. #}
+      <span class="reply-avatar" aria-hidden="true"> {# Agrupa o identificador visual da equipe, sem imagem de usuário. #}
+        CR {# Apresenta este texto ao usuário no contexto da seção. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+        <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+          {{ reply.author_label }} {# Insere a identificação funcional da equipe responsável pela resposta. #}
+        </strong> {# Encerra o destaque textual. #}
+        <time datetime="{{ reply.created_at|date:'c' }}"> {# Exibe data e hora com um valor estruturado para leitores e ferramentas do navegador. #}
+          {{ reply.created_at|date:'d/m/Y · H:i' }} {# Insere a data de publicação da resposta. #}
+        </time> {# Encerra a data e hora. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+    <div class="reply-body content-text"> {# Agrupa o texto da resposta, preservando as quebras de linha e o escaping. #}
+      {{ reply.body|linebreaksbr }} {# Insere o texto da resposta com HTML escapado e quebras preservadas. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </article> {# Encerra o bloco de conteúdo independente. #}
+{% empty %} {# Apresenta a orientação alternativa quando a lista de registros está vazia. #}
+  <div class="empty-state empty-state-small"> {# Agrupa a orientação exibida quando ainda não há registros para mostrar. #}
+    <span class="empty-icon" aria-hidden="true"> {# Agrupa o detalhe visual de uma área sem registros. #}
+      → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+    </span> {# Encerra o trecho de texto ou detalhe visual. #}
+    <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+      Ainda não há respostas {# Apresenta este texto ao usuário no contexto da seção. #}
+    </h3> {# Encerra o subtítulo. #}
+    <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+      A resposta da ouvidoria aparecerá aqui. Você pode consultar este protocolo quando quiser. {# Apresenta este texto ao usuário no contexto da seção. #}
+    </p> {# Encerra o parágrafo. #}
+  </div> {# Encerra o agrupamento de conteúdo. #}
+{% endfor %} {# Encerra a repetição dos registros recebidos do servidor. #}

@@ -1,0 +1,123 @@
+{% extends 'base.html' %} {# Reutiliza a estrutura do template base e preenche os blocos definidos nesta página. #}
+{# Detalhe da manifestação do próprio estudante com histórico e respostas da equipe. #}
+{% block title %} {# Inicia o bloco title, que esta página fornece à estrutura base. #}
+  {{ case.protocol }} {# Insere o protocolo imprevisível que identifica a manifestação. #}
+  · Ouvidoria Campo Real {# Apresenta este texto ao usuário no contexto da seção. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}
+{% block content %} {# Inicia o bloco content, que esta página fornece à estrutura base. #}
+  <div class="container page-shell"> {# Agrupa a área central com espaçamento para o conteúdo desta página. #}
+    <a class="breadcrumb" href="{% url 'ombudsman:student_dashboard' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+      <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+        ← {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      Minhas manifestações {# Apresenta este texto ao usuário no contexto da seção. #}
+    </a> {# Encerra o link. #}
+    <div class="page-heading"> {# Agrupa o título da página e sua ação principal. #}
+      <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+        <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+          ACOMPANHAMENTO DA MANIFESTAÇÃO {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <h1> {# Apresenta um título de nível 1 para organizar a hierarquia do conteúdo. #}
+          {{ case.title }} {# Insere o assunto da manifestação, escapando qualquer HTML informado. #}
+        </h1> {# Encerra o título principal. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Protocolo {# Apresenta este texto ao usuário no contexto da seção. #}
+          <strong class="protocol"> {# Agrupa o número de referência da manifestação. #}
+            {{ case.protocol }} {# Insere o protocolo imprevisível que identifica a manifestação. #}
+          </strong> {# Encerra o destaque textual. #}
+        </p> {# Encerra o parágrafo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      {% include 'includes/status.html' %} {# Reutiliza o indicador de situação da manifestação atual. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+    <div class="detail-grid"> {# Agrupa a área principal do atendimento e sua coluna de acompanhamento. #}
+      <div class="detail-main"> {# Agrupa os dados e formulários principais da manifestação. #}
+        <section class="panel"> {# Agrupa um painel de conteúdo com fundo e bordas consistentes. #}
+          <div class="panel-heading"> {# Agrupa o cabeçalho interno do painel. #}
+            <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+              Sua manifestação {# Apresenta este texto ao usuário no contexto da seção. #}
+            </h2> {# Encerra o título da seção. #}
+            <span class="badge badge-gray"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              {{ case.visibility_label }} {# Insere o nome legível da opção de identificação escolhida. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          <div class="case-info-row"> {# Agrupa o tipo, o setor e a data do registro. #}
+            <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+                Tipo {# Apresenta este texto ao usuário no contexto da seção. #}
+              </strong> {# Encerra o destaque textual. #}
+              {{ case.category_label }} {# Insere o nome legível do tipo da manifestação. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+                Setor {# Apresenta este texto ao usuário no contexto da seção. #}
+              </strong> {# Encerra o destaque textual. #}
+              {{ case.sector_label }} {# Insere o nome legível do setor relacionado à manifestação. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+                Registrado em {# Apresenta este texto ao usuário no contexto da seção. #}
+              </strong> {# Encerra o destaque textual. #}
+              {{ case.created_at|date:'d/m/Y · H:i' }} {# Insere a data do registro formatada para leitura. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          <div class="content-text case-description"> {# Agrupa o relato escrito pelo estudante, com escaping de HTML. #}
+            {{ case.description|linebreaksbr }} {# Insere o relato com quebras de linha preservadas e HTML escapado. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          {% if case.is_confidential %} {# Distingue um envio sigiloso de uma manifestação identificada. #}
+            <div class="notice notice-info"> {# Apresenta uma orientação contextual para usar o portal. #}
+              Envio sigiloso: sua identidade não aparece para a equipe da ouvidoria. A consulta excepcional pelo diretor exige justificativa e fica registrada. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </div> {# Encerra o agrupamento de conteúdo. #}
+          {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+        </section> {# Encerra a seção de conteúdo. #}
+        <section class="panel"> {# Agrupa um painel de conteúdo com fundo e bordas consistentes. #}
+          <div class="panel-heading"> {# Agrupa o cabeçalho interno do painel. #}
+            <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+              <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+                Respostas da ouvidoria {# Apresenta este texto ao usuário no contexto da seção. #}
+              </h2> {# Encerra o título da seção. #}
+              <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+                O retorno da equipe fica registrado neste espaço. {# Apresenta este texto ao usuário no contexto da seção. #}
+              </p> {# Encerra o parágrafo. #}
+            </div> {# Encerra o agrupamento de conteúdo. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          {% include 'includes/replies.html' %} {# Reutiliza a apresentação das respostas publicadas pela equipe. #}
+        </section> {# Encerra a seção de conteúdo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <aside class="detail-sidebar"> {# Agrupa o histórico e as orientações laterais do atendimento. #}
+        <div class="panel"> {# Agrupa um painel de conteúdo com fundo e bordas consistentes. #}
+          <div class="panel-heading"> {# Agrupa o cabeçalho interno do painel. #}
+            <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+              Histórico do atendimento {# Apresenta este texto ao usuário no contexto da seção. #}
+            </h2> {# Encerra o título da seção. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          {% include 'includes/timeline.html' %} {# Reutiliza o histórico público das atualizações do atendimento. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="protocol-box"> {# Agrupa o número de protocolo e a ação opcional de cópia. #}
+          <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+            GUARDE SEU PROTOCOLO {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+            {{ case.protocol }} {# Insere o protocolo imprevisível que identifica a manifestação. #}
+          </strong> {# Encerra o destaque textual. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Você pode voltar a esta página pelo seu espaço ou pela consulta de protocolo. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+          <button type="button" class="text-link" data-copy="{{ case.protocol }}"> {# Oferece a cópia opcional do protocolo; o JavaScript informa sucesso ou orienta a seleção manual. #}
+            Copiar protocolo {# Apresenta este texto ao usuário no contexto da seção. #}
+            <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              ⧉ {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </button> {# Encerra o botão. #}
+          <span class="copy-feedback" aria-live="polite"> {# Agrupa a mensagem acessível que informa o resultado da cópia. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <a class="btn btn-secondary btn-full" href="{% url 'ombudsman:create' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          Nova manifestação {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            ＋ {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </a> {# Encerra o link. #}
+      </aside> {# Encerra o painel complementar. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </div> {# Encerra o agrupamento de conteúdo. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}

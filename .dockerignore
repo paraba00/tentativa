@@ -1,0 +1,18 @@
+# O histórico do Git não é necessário para executar o site.
+.git
+# A imagem instala suas próprias dependências, em vez de copiar o ambiente local.
+.venv
+# Impede copiar as configurações e senhas reais para uma camada da imagem.
+.env
+# Inclui a proteção do .env.demo; o modelo não é necessário dentro do container.
+.env.*
+# Cache Python local não deve influenciar o build.
+__pycache__
+# Bancos locais SQLite não pertencem à imagem da aplicação.
+*.sqlite3
+# O Dockerfile gera seus próprios estáticos e manifesto durante o build.
+staticfiles
+# Capturas locais de demonstração ficam fora da aplicação executável.
+artifacts
+# Não inclui registros locais de operação que possam conter informações privadas.
+*.log

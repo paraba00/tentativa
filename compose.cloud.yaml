@@ -1,0 +1,21 @@
+# Complemento opcional para confiar no proxy da nuvem sem gravar certificados na imagem.
+# O Compose mescla este arquivo com compose.yaml quando dev.sh detecta a nuvem.
+services:
+  # Altera somente o serviço web; o banco continua com sua configuração principal.
+  web:
+    # Informa às bibliotecas Python onde estão as autoridades certificadoras confiáveis.
+    environment:
+      # Requests usa esta variável ao validar os HTTPS do login Google.
+      REQUESTS_CA_BUNDLE: /run/cloud-ca.pem
+      # Bibliotecas que usam o padrão OpenSSL recebem o mesmo bundle.
+      SSL_CERT_FILE: /run/cloud-ca.pem
+    # A confiança é montada em execução e acompanha a configuração desta máquina.
+    volumes:
+      # bind compartilha um arquivo já existente no anfitrião, sem copiar seu conteúdo.
+      - type: bind
+        # O bundle reúne certificados do sistema, incluindo o proxy configurado.
+        source: /etc/ssl/certs/ca-certificates.crt
+        # Caminho correspondente às duas variáveis de ambiente acima.
+        target: /run/cloud-ca.pem
+        # O aplicativo pode ler os certificados, mas não alterar o arquivo do anfitrião.
+        read_only: true

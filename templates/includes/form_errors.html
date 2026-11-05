@@ -1,0 +1,10 @@
+{% if form.non_field_errors %} {# Mostra os erros gerais do formulário que não pertencem a um único campo. #}
+{# Apresenta as falhas gerais de validação do formulário recebido pelo componente. #}
+  <div class="notice notice-error" role="alert"> {# Apresenta uma falha de validação ou de processamento de forma visível. #}
+    {% for error in form.non_field_errors %} {# Percorre error in form.non_field_errors para apresentar um item por registro recebido do servidor. #}
+      <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+        {{ error }} {# Insere o texto de um erro de validação devolvido pelo formulário. #}
+      </p> {# Encerra o parágrafo. #}
+    {% endfor %} {# Encerra a repetição dos registros recebidos do servidor. #}
+  </div> {# Encerra o agrupamento de conteúdo. #}
+{% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}

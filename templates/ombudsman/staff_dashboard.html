@@ -1,0 +1,240 @@
+{% extends 'base.html' %} {# Reutiliza a estrutura do template base e preenche os blocos definidos nesta página. #}
+{# Painel administrativo com filtros e dados operacionais, sem revelar identidades de envios sigilosos. #}
+{% block title %} {# Inicia o bloco title, que esta página fornece à estrutura base. #}
+  Administração · Ouvidoria Campo Real {# Apresenta este texto ao usuário no contexto da seção. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}
+{% block content %} {# Inicia o bloco content, que esta página fornece à estrutura base. #}
+  <div class="container page-shell"> {# Agrupa a área central com espaçamento para o conteúdo desta página. #}
+    <div class="page-heading"> {# Agrupa o título da página e sua ação principal. #}
+      <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+        <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+          ÁREA ADMINISTRATIVA {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <h1> {# Apresenta um título de nível 1 para organizar a hierarquia do conteúdo. #}
+          Escutar. Acolher. Resolver {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span class="heading-dot"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            . {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </h1> {# Encerra o título principal. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Acompanhe as manifestações e dê continuidade a cada atendimento. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <span class="badge badge-blue"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+        {% if user.role == 'director' %} {# Escolhe o rótulo visual do perfil; as permissões efetivas são verificadas pelo servidor. #}
+          Direção {# Apresenta este texto ao usuário no contexto da seção. #}
+        {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+          Equipe de ouvidoria {# Apresenta este texto ao usuário no contexto da seção. #}
+        {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+    <div class="stats-grid"> {# Agrupa os indicadores resumidos do painel. #}
+      <div class="stat-card"> {# Agrupa um indicador calculado pelo servidor a partir dos registros permitidos. #}
+        <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          Total de manifestações {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+          {{ metrics.total|default:0 }} {# Insere o total de manifestações permitido para este painel. #}
+        </strong> {# Encerra o destaque textual. #}
+        <span class="stat-caption"> {# Agrupa a descrição complementar de um indicador. #}
+          Visão geral da ouvidoria {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <div class="stat-card"> {# Agrupa um indicador calculado pelo servidor a partir dos registros permitidos. #}
+        <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          Em acompanhamento {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+          {{ metrics.open|default:0 }} {# Insere a quantidade de manifestações recebidas ou em análise. #}
+        </strong> {# Encerra o destaque textual. #}
+        <span class="stat-caption"> {# Agrupa a descrição complementar de um indicador. #}
+          Recebidas ou em análise {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <div class="stat-card"> {# Agrupa um indicador calculado pelo servidor a partir dos registros permitidos. #}
+        <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          Respondidas {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+          {{ metrics.answered|default:0 }} {# Insere a quantidade de manifestações respondidas. #}
+        </strong> {# Encerra o destaque textual. #}
+        <span class="stat-caption"> {# Agrupa a descrição complementar de um indicador. #}
+          Com retorno registrado {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <div class="stat-card"> {# Agrupa um indicador calculado pelo servidor a partir dos registros permitidos. #}
+        <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          Concluídas {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+          {{ metrics.closed|default:0 }} {# Insere a quantidade de manifestações concluídas. #}
+        </strong> {# Encerra o destaque textual. #}
+        <span class="stat-caption"> {# Agrupa a descrição complementar de um indicador. #}
+          Atendimentos encerrados {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+    <section class="panel"> {# Agrupa um painel de conteúdo com fundo e bordas consistentes. #}
+      <div class="panel-heading"> {# Agrupa o cabeçalho interno do painel. #}
+        <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+          <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+            Central de manifestações {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h2> {# Encerra o título da seção. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Encontre um protocolo e acesse os detalhes para responder. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <form method="get" class="filter-grid" role="search"> {# Envia os filtros pela URL sem alterar dados da aplicação. #}
+        <div class="form-field"> {# Agrupa um campo com rótulo, entrada e eventuais mensagens de validação. #}
+          <label for="search"> {# Associa o texto do rótulo à entrada pelo identificador do campo. #}
+            Buscar manifestação {# Apresenta este texto ao usuário no contexto da seção. #}
+          </label> {# Encerra o rótulo do campo. #}
+          <input id="search" type="search" name="q" value="{{ filters.q }}" placeholder="Título ou protocolo"> {# Recebe o título ou o protocolo a pesquisar sem consultar identidades sigilosas. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="form-field"> {# Agrupa um campo com rótulo, entrada e eventuais mensagens de validação. #}
+          <label for="status-filter"> {# Associa o texto do rótulo à entrada pelo identificador do campo. #}
+            Situação {# Apresenta este texto ao usuário no contexto da seção. #}
+          </label> {# Encerra o rótulo do campo. #}
+          <select id="status-filter" name="status"> {# Abre a lista de opções do filtro, preservando a seleção recebida pela URL. #}
+            <option value=""> {# Define uma opção do filtro e mantém a seleção atual quando ela corresponde ao valor. #}
+              Todas as situações {# Apresenta este texto ao usuário no contexto da seção. #}
+            </option> {# Encerra o elemento option. #}
+            {% for value,label in status_choices %} {# Percorre value,label in status_choices para apresentar um item por registro recebido do servidor. #}
+              <option value="{{ value }}" {% if filters.status == value %}selected{% endif %}> {# Define uma opção do filtro e mantém a seleção atual quando ela corresponde ao valor. #}
+                {{ label }} {# Insere o nome legível de uma opção recebida do servidor. #}
+              </option> {# Encerra o elemento option. #}
+            {% endfor %} {# Encerra a repetição dos registros recebidos do servidor. #}
+          </select> {# Encerra o lista de opções. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="form-field"> {# Agrupa um campo com rótulo, entrada e eventuais mensagens de validação. #}
+          <label for="category-filter"> {# Associa o texto do rótulo à entrada pelo identificador do campo. #}
+            Tipo {# Apresenta este texto ao usuário no contexto da seção. #}
+          </label> {# Encerra o rótulo do campo. #}
+          <select id="category-filter" name="category"> {# Abre a lista de opções do filtro, preservando a seleção recebida pela URL. #}
+            <option value=""> {# Define uma opção do filtro e mantém a seleção atual quando ela corresponde ao valor. #}
+              Todos os tipos {# Apresenta este texto ao usuário no contexto da seção. #}
+            </option> {# Encerra o elemento option. #}
+            {% for value,label in category_choices %} {# Percorre value,label in category_choices para apresentar um item por registro recebido do servidor. #}
+              <option value="{{ value }}" {% if filters.category == value %}selected{% endif %}> {# Define uma opção do filtro e mantém a seleção atual quando ela corresponde ao valor. #}
+                {{ label }} {# Insere o nome legível de uma opção recebida do servidor. #}
+              </option> {# Encerra o elemento option. #}
+            {% endfor %} {# Encerra a repetição dos registros recebidos do servidor. #}
+          </select> {# Encerra o lista de opções. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <button class="btn btn-primary" type="submit"> {# Envia o formulário ao servidor para validação e processamento da ação indicada. #}
+          Filtrar {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </button> {# Encerra o botão. #}
+        {% if filters.q or filters.status or filters.category %} {# Avalia a condição filters.q or filters.status or filters.category para decidir o trecho que será apresentado. #}
+          <a class="text-link" href="{% url 'ombudsman:staff_dashboard' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+            Limpar filtros {# Apresenta este texto ao usuário no contexto da seção. #}
+          </a> {# Encerra o link. #}
+        {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+      </form> {# Encerra o formulário. #}
+      {% if cases %} {# Mostra os registros disponíveis; sem eles, apresenta a orientação para uma lista vazia. #}
+        <div class="table-wrap"> {# Agrupa a área que permite rolagem da tabela em telas pequenas. #}
+          <table class="data-table"> {# Agrupa a tabela administrativa de manifestações sem identidades sigilosas. #}
+            <caption class="sr-only"> {# Nomeia a tabela para que leitores de tela identifiquem seu conteúdo. #}
+              Manifestações registradas na ouvidoria {# Apresenta este texto ao usuário no contexto da seção. #}
+            </caption> {# Encerra o elemento caption. #}
+            <thead> {# Abre o elemento thead para organizar o conteúdo desta seção. #}
+              <tr> {# Abre o elemento tr para organizar o conteúdo desta seção. #}
+                <th scope="col"> {# Define uma célula de cabeçalho e sua relação com a coluna de dados. #}
+                  Manifestação {# Apresenta este texto ao usuário no contexto da seção. #}
+                </th> {# Encerra a célula de cabeçalho. #}
+                <th scope="col"> {# Define uma célula de cabeçalho e sua relação com a coluna de dados. #}
+                  Tipo / setor {# Apresenta este texto ao usuário no contexto da seção. #}
+                </th> {# Encerra a célula de cabeçalho. #}
+                <th scope="col"> {# Define uma célula de cabeçalho e sua relação com a coluna de dados. #}
+                  Situação {# Apresenta este texto ao usuário no contexto da seção. #}
+                </th> {# Encerra a célula de cabeçalho. #}
+                <th scope="col"> {# Define uma célula de cabeçalho e sua relação com a coluna de dados. #}
+                  Envio {# Apresenta este texto ao usuário no contexto da seção. #}
+                </th> {# Encerra a célula de cabeçalho. #}
+                <th scope="col"> {# Define uma célula de cabeçalho e sua relação com a coluna de dados. #}
+                  Recebida em {# Apresenta este texto ao usuário no contexto da seção. #}
+                </th> {# Encerra a célula de cabeçalho. #}
+                <th scope="col"> {# Define uma célula de cabeçalho e sua relação com a coluna de dados. #}
+                  <span class="sr-only"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+                    Ação {# Apresenta este texto ao usuário no contexto da seção. #}
+                  </span> {# Encerra o trecho de texto ou detalhe visual. #}
+                </th> {# Encerra a célula de cabeçalho. #}
+              </tr> {# Encerra a linha da tabela. #}
+            </thead> {# Encerra o cabeçalho da tabela. #}
+            <tbody> {# Abre o elemento tbody para organizar o conteúdo desta seção. #}
+              {% for case in cases %} {# Percorre case in cases para apresentar um item por registro recebido do servidor. #}
+                <tr> {# Abre o elemento tr para organizar o conteúdo desta seção. #}
+                  <td> {# Abre uma célula de dados operacionais da manifestação. #}
+                    <a class="table-title" href="{% url 'ombudsman:staff_detail' case.protocol %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+                      {{ case.title }} {# Insere o assunto da manifestação, escapando qualquer HTML informado. #}
+                    </a> {# Encerra o link. #}
+                    <span class="protocol table-protocol"> {# Agrupa o número de referência da manifestação. #}
+                      {{ case.protocol }} {# Insere o protocolo imprevisível que identifica a manifestação. #}
+                    </span> {# Encerra o trecho de texto ou detalhe visual. #}
+                  </td> {# Encerra a célula de dados. #}
+                  <td> {# Abre uma célula de dados operacionais da manifestação. #}
+                    <span> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+                      {{ case.category_label }} {# Insere o nome legível do tipo da manifestação. #}
+                    </span> {# Encerra o trecho de texto ou detalhe visual. #}
+                    <span class="table-secondary"> {# Agrupa uma informação complementar da linha da tabela. #}
+                      {{ case.sector_label }} {# Insere o nome legível do setor relacionado à manifestação. #}
+                    </span> {# Encerra o trecho de texto ou detalhe visual. #}
+                  </td> {# Encerra a célula de dados. #}
+                  <td> {# Abre uma célula de dados operacionais da manifestação. #}
+                    {% include 'includes/status.html' %} {# Reutiliza o indicador de situação da manifestação atual. #}
+                  </td> {# Encerra a célula de dados. #}
+                  <td> {# Abre uma célula de dados operacionais da manifestação. #}
+                    <span class="visibility-label"> {# Agrupa a indicação do envio identificado ou sigiloso. #}
+                      {% if case.is_confidential %} {# Distingue um envio sigiloso de uma manifestação identificada. #}
+                        <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+                          ◈ {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+                        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+                        Sigiloso {# Apresenta este texto ao usuário no contexto da seção. #}
+                      {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+                        Identificado {# Apresenta este texto ao usuário no contexto da seção. #}
+                      {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+                    </span> {# Encerra o trecho de texto ou detalhe visual. #}
+                  </td> {# Encerra a célula de dados. #}
+                  <td> {# Abre uma célula de dados operacionais da manifestação. #}
+                    {{ case.created_at|date:'d/m/Y' }} {# Insere a data do registro formatada para leitura. #}
+                    <span class="table-secondary"> {# Agrupa uma informação complementar da linha da tabela. #}
+                      {{ case.created_at|date:'H:i' }} {# Insere a data do registro formatada para leitura. #}
+                    </span> {# Encerra o trecho de texto ou detalhe visual. #}
+                  </td> {# Encerra a célula de dados. #}
+                  <td> {# Abre uma célula de dados operacionais da manifestação. #}
+                    <a class="table-action" href="{% url 'ombudsman:staff_detail' case.protocol %}" aria-label="Abrir manifestação {{ case.protocol }}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+                      → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+                    </a> {# Encerra o link. #}
+                  </td> {# Encerra a célula de dados. #}
+                </tr> {# Encerra a linha da tabela. #}
+              {% endfor %} {# Encerra a repetição dos registros recebidos do servidor. #}
+            </tbody> {# Encerra o corpo da tabela. #}
+          </table> {# Encerra a tabela. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+        <div class="empty-state"> {# Agrupa a orientação exibida quando ainda não há registros para mostrar. #}
+          <span class="empty-icon" aria-hidden="true"> {# Agrupa o detalhe visual de uma área sem registros. #}
+            → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h3> {# Apresenta um título de nível 3 para organizar a hierarquia do conteúdo. #}
+            Nenhuma manifestação encontrada. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h3> {# Encerra o subtítulo. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            {% if filters.q or filters.status or filters.category %} {# Avalia a condição filters.q or filters.status or filters.category para decidir o trecho que será apresentado. #}
+              Tente outro termo ou remova os filtros para ampliar a busca. {# Apresenta este texto ao usuário no contexto da seção. #}
+            {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+              Quando a comunidade enviar manifestações, elas aparecerão neste painel. {# Apresenta este texto ao usuário no contexto da seção. #}
+            {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+          </p> {# Encerra o parágrafo. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+      {% include 'includes/pagination.html' %} {# Reutiliza a navegação entre páginas mantendo os filtros da consulta. #}
+    </section> {# Encerra a seção de conteúdo. #}
+    <div class="notice notice-info dashboard-note"> {# Apresenta uma orientação contextual para usar o portal. #}
+      Em envios sigilosos, os dados de identificação ficam ocultos para a equipe. A consulta excepcional é exclusiva do perfil de diretor, com justificativa e auditoria. {# Apresenta este texto ao usuário no contexto da seção. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </div> {# Encerra o agrupamento de conteúdo. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}

@@ -1,0 +1,142 @@
+{% extends 'base.html' %} {# Reutiliza a estrutura do template base e preenche os blocos definidos nesta página. #}
+{# Formulário autenticado de manifestação, com opções de identificação e aceite de privacidade. #}
+{% block title %} {# Inicia o bloco title, que esta página fornece à estrutura base. #}
+  Nova manifestação · Ouvidoria Campo Real {# Apresenta este texto ao usuário no contexto da seção. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}
+{% block content %} {# Inicia o bloco content, que esta página fornece à estrutura base. #}
+  <div class="container page-shell"> {# Agrupa a área central com espaçamento para o conteúdo desta página. #}
+    <a class="breadcrumb" href="{% url 'ombudsman:student_dashboard' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+      <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+        ← {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      Voltar ao meu espaço {# Apresenta este texto ao usuário no contexto da seção. #}
+    </a> {# Encerra o link. #}
+    <div class="page-heading"> {# Agrupa o título da página e sua ação principal. #}
+      <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+        <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+          SUA VOZ, NOSSO COMPROMISSO {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <h1> {# Apresenta um título de nível 1 para organizar a hierarquia do conteúdo. #}
+          Nova manifestação {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span class="heading-dot"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            . {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </h1> {# Encerra o título principal. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Conte com clareza. Cada detalhe ajuda a compreender a sua experiência. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+      <span class="step-indicator"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+        REGISTRAR {# Apresenta este texto ao usuário no contexto da seção. #}
+        <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+          → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        ACOMPANHAR {# Apresenta este texto ao usuário no contexto da seção. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+    <div class="detail-grid"> {# Agrupa a área principal do atendimento e sua coluna de acompanhamento. #}
+      <section class="panel detail-main"> {# Agrupa um painel de conteúdo com fundo e bordas consistentes. #}
+        <form method="post" novalidate> {# Agrupa os campos enviados por POST; o servidor valida os dados e o token CSRF antes de salvar. #}
+          {% csrf_token %} {# Insere o token CSRF exigido para validar este envio POST e impedir requisições forjadas. #}
+          {% include 'includes/form_errors.html' %} {# Reutiliza as mensagens de validação gerais do formulário desta seção. #}
+          <div class="form-section-heading"> {# Agrupa o título de uma etapa do formulário. #}
+            <span class="form-step"> {# Agrupa a numeração da seção de preenchimento. #}
+              01 {# Apresenta este texto ao usuário no contexto da seção. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+              <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+                Sobre o que vamos conversar? {# Apresenta este texto ao usuário no contexto da seção. #}
+              </h2> {# Encerra o título da seção. #}
+              <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+                Escolha o tipo e o setor relacionados à sua manifestação. {# Apresenta este texto ao usuário no contexto da seção. #}
+              </p> {# Encerra o parágrafo. #}
+            </div> {# Encerra o agrupamento de conteúdo. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          <div class="form-grid"> {# Agrupa os campos que podem ser apresentados lado a lado. #}
+            {% include 'includes/field.html' with field=form.category %} {# Renderiza o componente acessível do campo form.category, incluindo ajuda e erros. #}
+            {% include 'includes/field.html' with field=form.sector %} {# Renderiza o componente acessível do campo form.sector, incluindo ajuda e erros. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          {% include 'includes/field.html' with field=form.title %} {# Renderiza o componente acessível do campo form.title, incluindo ajuda e erros. #}
+          {% include 'includes/field.html' with field=form.description %} {# Renderiza o componente acessível do campo form.description, incluindo ajuda e erros. #}
+          <div class="form-section-heading"> {# Agrupa o título de uma etapa do formulário. #}
+            <span class="form-step"> {# Agrupa a numeração da seção de preenchimento. #}
+              02 {# Apresenta este texto ao usuário no contexto da seção. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+              <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+                Como deseja se identificar? {# Apresenta este texto ao usuário no contexto da seção. #}
+              </h2> {# Encerra o título da seção. #}
+              <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+                Entenda a diferença antes de escolher. {# Apresenta este texto ao usuário no contexto da seção. #}
+              </p> {# Encerra o parágrafo. #}
+            </div> {# Encerra o agrupamento de conteúdo. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          {% include 'includes/field.html' with field=form.visibility %} {# Renderiza o componente acessível do campo form.visibility, incluindo ajuda e erros. #}
+          <div class="privacy-options"> {# Agrupa as explicações sobre as opções identificada e sigilosa. #}
+            <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+              <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+                Identificado {# Apresenta este texto ao usuário no contexto da seção. #}
+              </strong> {# Encerra o destaque textual. #}
+              <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+                Seu nome e e-mail ficam visíveis para a equipe da ouvidoria responsável pelo atendimento. {# Apresenta este texto ao usuário no contexto da seção. #}
+              </p> {# Encerra o parágrafo. #}
+            </div> {# Encerra o agrupamento de conteúdo. #}
+            <div> {# Abre o elemento div para organizar o conteúdo desta seção. #}
+              <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+                Sigiloso {# Apresenta este texto ao usuário no contexto da seção. #}
+              </strong> {# Encerra o destaque textual. #}
+              <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+                Sua identidade fica oculta para a equipe da ouvidoria. Apenas o diretor pode consultá-la excepcionalmente, mediante justificativa e registro de auditoria. Não é anonimato absoluto. {# Apresenta este texto ao usuário no contexto da seção. #}
+              </p> {# Encerra o parágrafo. #}
+            </div> {# Encerra o agrupamento de conteúdo. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          {% include 'includes/field.html' with field=form.privacy_ack %} {# Renderiza o componente acessível do campo form.privacy_ack, incluindo ajuda e erros. #}
+          <div class="form-actions"> {# Agrupa as ações para enviar ou cancelar o formulário. #}
+            <a class="btn btn-secondary" href="{% url 'ombudsman:student_dashboard' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+              Cancelar {# Apresenta este texto ao usuário no contexto da seção. #}
+            </a> {# Encerra o link. #}
+            <button class="btn btn-primary" type="submit"> {# Envia o formulário ao servidor para validação e processamento da ação indicada. #}
+              Enviar manifestação {# Apresenta este texto ao usuário no contexto da seção. #}
+              <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+                → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+              </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            </button> {# Encerra o botão. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+        </form> {# Encerra o formulário. #}
+      </section> {# Encerra a seção de conteúdo. #}
+      <aside class="detail-sidebar"> {# Agrupa o histórico e as orientações laterais do atendimento. #}
+        <div class="panel guidance-card"> {# Agrupa um painel de conteúdo com fundo e bordas consistentes. #}
+          <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+            ANTES DE ENVIAR {# Apresenta este texto ao usuário no contexto da seção. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+            Um bom relato ajuda a cuidar melhor. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </h2> {# Encerra o título da seção. #}
+          <ul class="guidance-list"> {# Agrupa os cuidados recomendados antes do envio. #}
+            <li> {# Abre um item da lista apresentada nesta seção. #}
+              Descreva o que aconteceu e, se possível, quando e onde. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </li> {# Encerra o item da lista. #}
+            <li> {# Abre um item da lista apresentada nesta seção. #}
+              Use uma linguagem respeitosa e objetiva. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </li> {# Encerra o item da lista. #}
+            <li> {# Abre um item da lista apresentada nesta seção. #}
+              Evite inserir dados pessoais no texto se optar pelo sigilo. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </li> {# Encerra o item da lista. #}
+            <li> {# Abre um item da lista apresentada nesta seção. #}
+              Guarde o protocolo gerado para acompanhar o retorno. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </li> {# Encerra o item da lista. #}
+          </ul> {# Encerra a lista sem ordenação. #}
+          <div class="guidance-footer"> {# Agrupa o lembrete de vinculação à conta institucional. #}
+            <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            Sua manifestação será vinculada à sua conta institucional. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+        <div class="notice notice-info"> {# Apresenta uma orientação contextual para usar o portal. #}
+          Após o envio, você receberá um número de protocolo e poderá acompanhar a resposta no seu espaço. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      </aside> {# Encerra o painel complementar. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </div> {# Encerra o agrupamento de conteúdo. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}

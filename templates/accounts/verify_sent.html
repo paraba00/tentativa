@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {# Reutiliza a estrutura do template base e preenche os blocos definidos nesta página. #}
+{# Orienta a confirmação do e-mail e oferece reenvio autenticado com proteção CSRF. #}
+{% block title %} {# Inicia o bloco title, que esta página fornece à estrutura base. #}
+  Confirme seu e-mail · Ouvidoria Campo Real {# Apresenta este texto ao usuário no contexto da seção. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}
+{% block content %} {# Inicia o bloco content, que esta página fornece à estrutura base. #}
+  <div class="container page-shell"> {# Agrupa a área central com espaçamento para o conteúdo desta página. #}
+    <div class="auth-card panel centered standalone-card"> {# Agrupa o painel que reúne as instruções e os campos de acesso. #}
+      <span class="success-illustration" aria-hidden="true"> {# Agrupa a ilustração de correspondência da etapa de confirmação. #}
+        <svg width="42" height="42" viewBox="0 0 42 42" fill="none"> {# Define um desenho vetorial local que acompanha a cor do componente e dispensa imagens externas. #}
+          <rect x="4" y="8" width="34" height="26" rx="4" stroke="currentColor" stroke-width="2"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+          <path d="m5 10 16 12 16-12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/> {# Traça uma parte da ilustração vetorial com as coordenadas e o traço definidos. #}
+        </svg> {# Encerra a ilustração vetorial. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+        SÓ MAIS UM PASSO {# Apresenta este texto ao usuário no contexto da seção. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      <h1> {# Apresenta um título de nível 1 para organizar a hierarquia do conteúdo. #}
+        Confirme seu e-mail. {# Apresenta este texto ao usuário no contexto da seção. #}
+      </h1> {# Encerra o título principal. #}
+      {% if verification_sent %} {# Diferencia uma confirmação efetivamente enviada de uma solicitação ainda necessária. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Enviamos um link de confirmação para o e-mail informado. Acesse a mensagem para ativar o envio de manifestações. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+      {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Confirme seu e-mail institucional para ativar o envio de manifestações. Use o botão abaixo para solicitar um link de confirmação. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+      {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+      {% if development_mode %} {# Mostra uma orientação específica do ambiente de demonstração. #}
+        <div class="notice notice-info"> {# Apresenta uma orientação contextual para usar o portal. #}
+          Na demonstração com envio por console, o link aparece no terminal do servidor. Em um ambiente com envio de e-mails configurado, verifique sua caixa de entrada e o spam. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+      <form method="post" action="{% url 'accounts:resend_verification' %}"> {# Agrupa os campos enviados por POST; o servidor valida os dados e o token CSRF antes de salvar. #}
+        {% csrf_token %} {# Insere o token CSRF exigido para validar este envio POST e impedir requisições forjadas. #}
+        <button class="btn btn-primary" type="submit"> {# Envia o formulário ao servidor para validação e processamento da ação indicada. #}
+          Reenviar confirmação {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </button> {# Encerra o botão. #}
+      </form> {# Encerra o formulário. #}
+      <p class="auth-switch"> {# Agrupa o atalho para alternar entre cadastro e acesso. #}
+        <a href="{% url 'ombudsman:student_dashboard' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          Voltar ao meu espaço {# Apresenta este texto ao usuário no contexto da seção. #}
+        </a> {# Encerra o link. #}
+      </p> {# Encerra o parágrafo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </div> {# Encerra o agrupamento de conteúdo. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}

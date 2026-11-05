@@ -1,0 +1,42 @@
+<!-- Ilustração vetorial original do projeto acadêmico; utiliza azuis derivados de #003D59 e detalhes em #FFDF00. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 460" fill="none" role="img" aria-labelledby="title desc"> <!-- Cria a área vetorial de 620 por 460 unidades e associa o título e a descrição acessíveis. -->
+  <title id="title">Um campus de portas abertas</title> <!-- Fornece o nome acessível desta ilustração própria, que não substitui a logo institucional. -->
+  <desc id="desc">Ilustração abstrata de uma universidade em azul, com árvores, caminhos e uma janela em amarelo.</desc> <!-- Descreve o conteúdo visual para tecnologias assistivas. -->
+  <defs> <!-- Agrupa os degradês reutilizados no céu e na fachada do edifício. -->
+    <linearGradient id="sky" x1="130" y1="30" x2="500" y2="430" gradientUnits="userSpaceOnUse"><stop stop-color="#EBF7FD"/><stop offset="1" stop-color="#F6FBFD"/></linearGradient> <!-- Define a transição de azuis muito claros usada no fundo do campus. -->
+    <linearGradient id="wall" x1="230" y1="140" x2="430" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="#FCFEFF"/><stop offset="1" stop-color="#E0EEF5"/></linearGradient> <!-- Define a transição da fachada branca para um azul claro derivado da marca. -->
+  </defs> <!-- Encerra as definições reutilizáveis da ilustração. -->
+  <rect x="42" y="28" width="536" height="398" rx="38" fill="url(#sky)"/> <!-- Desenha o fundo arredondado do campus usando o degradê do céu. -->
+  <path d="M64 97H126M95 66V128M512 347H552M532 327V367" stroke="#D2E5EE" stroke-width="1.5"/> <!-- Adiciona pequenos traços de composição em azul suave. -->
+  <circle cx="469" cy="103" r="31" fill="#FFDF00"/> <!-- Desenha o sol com o amarelo institucional dos pequenos detalhes. -->
+  <circle cx="469" cy="103" r="43" stroke="#FFF6A8" stroke-width="1.5"/> <!-- Cria um contorno amarelo suave ao redor do sol. -->
+  <path d="M84 307C136 275 172 303 216 289C270 273 304 302 353 284C405 264 467 280 539 305V370H84V307Z" fill="#E1EFF5"/> <!-- Forma a paisagem azul clara atrás do edifício. -->
+  <path d="M62 360C146 335 186 360 260 350C329 340 368 328 433 346C478 359 515 347 561 362V396H62V360Z" fill="#CFE2EB"/> <!-- Forma a faixa de terreno na base do campus. -->
+  <ellipse cx="309" cy="379" rx="173" ry="16" fill="#C3D9E3" fill-opacity=".5"/> <!-- Projeta uma sombra suave sob o edifício para sugerir profundidade. -->
+  <path d="M203 164L331 106L470 166L341 223L203 164Z" fill="#00617F"/> <!-- Desenha o plano principal da cobertura com um azul derivado da marca. -->
+  <path d="M331 106V123L451 174L470 166L331 106Z" fill="#003D59"/> <!-- Escurece a lateral da cobertura para indicar sua orientação. -->
+  <path d="M203 164L341 223V367L203 307V164Z" fill="url(#wall)"/> <!-- Preenche a fachada principal com o degradê claro definido anteriormente. -->
+  <path d="M341 223L470 166V307L341 367V223Z" fill="#C0DAE6"/> <!-- Preenche a fachada lateral com um tom azul mais sombreado. -->
+  <path d="M203 203L341 263L470 205" stroke="#B4D1DE" stroke-width="3"/> <!-- Traça a divisão horizontal do primeiro pavimento. -->
+  <path d="M203 260L341 320L470 262" stroke="#B4D1DE" stroke-width="3"/> <!-- Traça a divisão horizontal do segundo pavimento. -->
+  <path d="M220 192L245 203V231L220 220V192ZM258 209L283 220V248L258 237V209ZM296 226L321 237V265L296 254V226Z" fill="#00617F"/> <!-- Desenha o conjunto superior de janelas da fachada principal. -->
+  <path d="M220 247L245 258V286L220 275V247ZM258 264L283 275V303L258 292V264Z" fill="#629EBA"/> <!-- Desenha o conjunto inferior de janelas da fachada principal. -->
+  <path d="M296 281L321 292V320L296 309V281Z" fill="#FFDF00"/> <!-- Destaca uma janela com o amarelo institucional. -->
+  <path d="M360 230L384 219V247L360 258V230ZM398 213L422 202V230L398 241V213ZM436 196L454 188V216L436 224V196Z" fill="#003D59"/> <!-- Desenha as janelas superiores da fachada lateral em azul escuro. -->
+  <path d="M360 285L384 274V302L360 313V285ZM398 268L422 257V285L398 296V268ZM436 251L454 243V271L436 279V251Z" fill="#46809A"/> <!-- Desenha as janelas inferiores da fachada lateral em azul médio. -->
+  <path d="M261 317L287 328V343L261 332V317Z" fill="#003D59"/> <!-- Desenha a porta de entrada na base do edifício. -->
+  <path d="M196 308L341 372L477 309V319L341 383L196 318V308Z" fill="#92BCCF"/> <!-- Forma a base elevada do edifício para manter a perspectiva. -->
+  <path d="M326 369L292 384L261 371L235 383L269 398L307 398L346 380" fill="#F7FCFE"/> <!-- Desenha o caminho claro que leva à entrada do campus. -->
+  <path d="M175 312V362" stroke="#668EA0" stroke-width="5" stroke-linecap="round"/> <!-- Desenha o tronco da árvore à esquerda. -->
+  <path d="M175 252C157 267 147 289 149 304C151 319 166 329 180 325C196 321 205 307 199 291C194 278 188 263 175 252Z" fill="#3C7E9C"/> <!-- Forma a copa da árvore à esquerda com um azul derivado da marca. -->
+  <path d="M175 282V319M175 303L186 293M175 311L164 301" stroke="#2C6681" stroke-width="2.5" stroke-linecap="round"/> <!-- Acrescenta os galhos internos da árvore à esquerda. -->
+  <path d="M497 298V348" stroke="#668EA0" stroke-width="4" stroke-linecap="round"/> <!-- Desenha o tronco da árvore à direita. -->
+  <path d="M497 246C482 260 475 278 478 291C481 304 493 310 504 306C517 302 522 291 517 278C512 266 507 254 497 246Z" fill="#80AABD"/> <!-- Forma a copa da árvore à direita com um azul de apoio mais claro. -->
+  <path d="M497 272V301M497 286L505 279" stroke="#598CA3" stroke-width="2" stroke-linecap="round"/> <!-- Acrescenta os galhos internos da árvore à direita. -->
+  <path d="M136 356L145 351M143 363L153 359M487 373L497 368M490 382L503 376" stroke="#A3C2D0" stroke-width="2" stroke-linecap="round"/> <!-- Desenha pequenos traços no terreno para complementar a paisagem. -->
+  <path d="M136 134H165C173 134 180 141 180 149V164C180 172 173 179 165 179H154L143 189V179H136C128 179 121 172 121 164V149C121 141 128 134 136 134Z" fill="white" stroke="#D4E5EC"/> <!-- Cria o balão branco de conversa, associado ao propósito da ouvidoria. -->
+  <circle cx="137" cy="156" r="2.5" fill="#00617F"/><circle cx="150" cy="156" r="2.5" fill="#00617F"/><circle cx="163" cy="156" r="2.5" fill="#00617F"/> <!-- Acrescenta os três pontos azuis do balão de conversa. -->
+  <path d="M507 182L513 177L519 182V190C519 195 513 198 513 198C513 198 507 195 507 190V182Z" fill="#FFDF00"/> <!-- Desenha o escudo amarelo que representa o cuidado com as manifestações. -->
+  <path d="M510 188L512 190L516 185" stroke="#8B6708" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <!-- Adiciona a marca de confirmação dentro do escudo. -->
+  <circle cx="112" cy="232" r="4" fill="#FFDF00"/><circle cx="539" cy="259" r="3" fill="#78AAC1"/><circle cx="266" cy="69" r="3" fill="#BDDAE7"/> <!-- Distribui pontos decorativos discretos em azul e amarelo. -->
+</svg> <!-- Encerra a composição vetorial do campus. -->

@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {# Reutiliza a estrutura do template base e preenche os blocos definidos nesta página. #}
+{# Cadastro local de demonstração, disponível somente quando habilitado no desenvolvimento. #}
+{% block title %} {# Inicia o bloco title, que esta página fornece à estrutura base. #}
+  Criar conta de demonstração · Ouvidoria Campo Real {# Apresenta este texto ao usuário no contexto da seção. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}
+{% block content %} {# Inicia o bloco content, que esta página fornece à estrutura base. #}
+  <div class="container page-shell"> {# Agrupa a área central com espaçamento para o conteúdo desta página. #}
+    <a class="breadcrumb" href="{% url 'accounts:login' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+      <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+        ← {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      Voltar para o acesso {# Apresenta este texto ao usuário no contexto da seção. #}
+    </a> {# Encerra o link. #}
+    <div class="auth-layout"> {# Agrupa as duas colunas da página de acesso ou consulta. #}
+      <aside class="auth-aside"> {# Agrupa o painel de apresentação ao lado do formulário. #}
+        <span class="eyebrow"> {# Agrupa o identificador curto da área ou da etapa atual. #}
+          PARTICIPE DA CONVERSA {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <h1> {# Apresenta um título de nível 1 para organizar a hierarquia do conteúdo. #}
+          O primeiro passo {# Apresenta este texto ao usuário no contexto da seção. #}
+          <br> {# Define a quebra de linha intencional neste trecho de apresentação. #}
+          é se conectar. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </h1> {# Encerra o título principal. #}
+        <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+          Com sua conta, você pode registrar manifestações e consultar respostas em um só lugar. {# Apresenta este texto ao usuário no contexto da seção. #}
+        </p> {# Encerra o parágrafo. #}
+        <div class="auth-aside-note"> {# Agrupa a orientação sobre a conta institucional ou o protocolo. #}
+          <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            Envio identificado ou sigiloso. {# Apresenta este texto ao usuário no contexto da seção. #}
+            <br> {# Define a quebra de linha intencional neste trecho de apresentação. #}
+            <strong> {# Destaca uma informação importante sem alterar seu conteúdo. #}
+              Você escolhe antes de enviar. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </strong> {# Encerra o destaque textual. #}
+          </p> {# Encerra o parágrafo. #}
+        </div> {# Encerra o agrupamento de conteúdo. #}
+      </aside> {# Encerra o painel complementar. #}
+      <section class="auth-card panel"> {# Agrupa o painel que reúne as instruções e os campos de acesso. #}
+        <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+          ACESSO DE DESENVOLVIMENTO {# Apresenta este texto ao usuário no contexto da seção. #}
+        </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        <h2> {# Apresenta um título de nível 2 para organizar a hierarquia do conteúdo. #}
+          Criar conta de demonstração {# Apresenta este texto ao usuário no contexto da seção. #}
+        </h2> {# Encerra o título da seção. #}
+        {% if local_accounts_enabled %} {# Exibe o acesso local de demonstração somente quando ele está habilitado no desenvolvimento. #}
+          <div class="notice notice-warning"> {# Destaca uma condição de privacidade ou uma limitação que precisa de atenção. #}
+            Cadastro local disponível apenas no ambiente de desenvolvimento. Use um e-mail com domínio @camporeal.edu.br. O acesso institucional definitivo usa o Google da faculdade. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </div> {# Encerra o agrupamento de conteúdo. #}
+          <form method="post" novalidate> {# Agrupa os campos enviados por POST; o servidor valida os dados e o token CSRF antes de salvar. #}
+            {% csrf_token %} {# Insere o token CSRF exigido para validar este envio POST e impedir requisições forjadas. #}
+            {% include 'includes/form_errors.html' %} {# Reutiliza as mensagens de validação gerais do formulário desta seção. #}
+            <div class="form-grid"> {# Agrupa os campos que podem ser apresentados lado a lado. #}
+              {% include 'includes/field.html' with field=form.first_name %} {# Renderiza o componente acessível do campo form.first_name, incluindo ajuda e erros. #}
+              {% include 'includes/field.html' with field=form.last_name %} {# Renderiza o componente acessível do campo form.last_name, incluindo ajuda e erros. #}
+            </div> {# Encerra o agrupamento de conteúdo. #}
+            {% include 'includes/field.html' with field=form.email %} {# Renderiza o componente acessível do campo form.email, incluindo ajuda e erros. #}
+            {% include 'includes/field.html' with field=form.password1 %} {# Renderiza o componente acessível do campo form.password1, incluindo ajuda e erros. #}
+            {% include 'includes/field.html' with field=form.password2 %} {# Renderiza o componente acessível do campo form.password2, incluindo ajuda e erros. #}
+            <p class="field-help"> {# Agrupa a ajuda do campo definida pelo formulário no servidor. #}
+              Após o cadastro, você deverá confirmar o e-mail antes de enviar uma manifestação. {# Apresenta este texto ao usuário no contexto da seção. #}
+            </p> {# Encerra o parágrafo. #}
+            <button type="submit" class="btn btn-primary btn-full"> {# Envia o formulário ao servidor para validação e processamento da ação indicada. #}
+              Criar minha conta {# Apresenta este texto ao usuário no contexto da seção. #}
+              <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+                → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+              </span> {# Encerra o trecho de texto ou detalhe visual. #}
+            </button> {# Encerra o botão. #}
+          </form> {# Encerra o formulário. #}
+          <p class="auth-switch"> {# Agrupa o atalho para alternar entre cadastro e acesso. #}
+            Já possui uma conta? {# Apresenta este texto ao usuário no contexto da seção. #}
+            <a href="{% url 'accounts:login' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+              Acessar portal {# Apresenta este texto ao usuário no contexto da seção. #}
+            </a> {# Encerra o link. #}
+          </p> {# Encerra o parágrafo. #}
+        {% else %} {# Apresenta a alternativa quando a condição anterior não é atendida. #}
+          <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+            O cadastro é realizado ao acessar com sua conta Google institucional. {# Apresenta este texto ao usuário no contexto da seção. #}
+          </p> {# Encerra o parágrafo. #}
+          <a class="btn btn-primary" href="{% url 'accounts:login' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+            Acessar com Google {# Apresenta este texto ao usuário no contexto da seção. #}
+            <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+              → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+            </span> {# Encerra o trecho de texto ou detalhe visual. #}
+          </a> {# Encerra o link. #}
+        {% endif %} {# Encerra a condição de apresentação iniciada anteriormente. #}
+      </section> {# Encerra a seção de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </div> {# Encerra o agrupamento de conteúdo. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {# Reutiliza a estrutura do template base e preenche os blocos definidos nesta página. #}
+{# Página de acesso negado para contas que não possuem a permissão necessária. #}
+{% block title %} {# Inicia o bloco title, que esta página fornece à estrutura base. #}
+  Acesso restrito · Ouvidoria Campo Real {# Apresenta este texto ao usuário no contexto da seção. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}
+{% block content %} {# Inicia o bloco content, que esta página fornece à estrutura base. #}
+  <section class="container page-shell"> {# Agrupa a área central com espaçamento para o conteúdo desta página. #}
+    <div class="panel empty-state error-page"> {# Agrupa um painel de conteúdo com fundo e bordas consistentes. #}
+      <span class="error-code"> {# Agrupa o código HTTP que identifica a situação apresentada. #}
+        403 {# Apresenta este texto ao usuário no contexto da seção. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      <span class="section-kicker"> {# Agrupa o pequeno título de contexto acima do título principal. #}
+        UM CUIDADO COM A PRIVACIDADE {# Apresenta este texto ao usuário no contexto da seção. #}
+      </span> {# Encerra o trecho de texto ou detalhe visual. #}
+      <h1> {# Apresenta um título de nível 1 para organizar a hierarquia do conteúdo. #}
+        Este espaço tem acesso restrito. {# Apresenta este texto ao usuário no contexto da seção. #}
+      </h1> {# Encerra o título principal. #}
+      <p> {# Apresenta um parágrafo de orientação ou de conteúdo da página. #}
+        Sua conta não possui permissão para acessar esta página. A área administrativa está disponível apenas para a equipe autorizada. {# Apresenta este texto ao usuário no contexto da seção. #}
+      </p> {# Encerra o parágrafo. #}
+      <div class="hero-actions"> {# Agrupa os botões que iniciam o envio ou o acompanhamento. #}
+        <a class="btn btn-primary" href="{% url 'ombudsman:home' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          Voltar ao início {# Apresenta este texto ao usuário no contexto da seção. #}
+          <span aria-hidden="true"> {# Agrupa um trecho curto de texto ou um detalhe visual do componente. #}
+            → {# Apresenta um símbolo visual de apoio à ação indicada pelo texto próximo. #}
+          </span> {# Encerra o trecho de texto ou detalhe visual. #}
+        </a> {# Encerra o link. #}
+        <a class="btn btn-secondary" href="{% url 'accounts:login' %}"> {# Gera um link interno pela rota nomeada, evitando endereços fixos duplicados no template. #}
+          Página de acesso {# Apresenta este texto ao usuário no contexto da seção. #}
+        </a> {# Encerra o link. #}
+      </div> {# Encerra o agrupamento de conteúdo. #}
+    </div> {# Encerra o agrupamento de conteúdo. #}
+  </section> {# Encerra a seção de conteúdo. #}
+{% endblock %} {# Encerra o bloco de conteúdo definido por este template. #}

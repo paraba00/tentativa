@@ -1,0 +1,71 @@
+# Nome próprio do conjunto: distingue estes containers dos usados nos testes.
+name: camporeal-ouvidoria
+# Cada item de services descreve um processo isolado necessário à aplicação.
+services:
+  # Serviço responsável por persistir usuários, manifestações, respostas e auditoria.
+  db:
+    # Usa a versão 8.4 da imagem oficial do MySQL.
+    image: mysql:8.4
+    # Reinicia após falhas ou reinício do Docker, exceto se for parado manualmente.
+    restart: unless-stopped
+    # Estas opções são lidas pelo inicializador da imagem do MySQL.
+    environment:
+      # Usa DB_NAME do .env; se não existir, chama o banco de ouvidoria.
+      MYSQL_DATABASE: ${DB_NAME:-ouvidoria}
+      # Cria o usuário da aplicação, separado do administrador root.
+      MYSQL_USER: ${DB_USER:-ouvidoria}
+      # Exige uma senha no .env: não inicia silenciosamente com uma senha padrão.
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Defina DB_PASSWORD no .env}
+      # A senha administrativa é separada da senha usada pelo site.
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Defina DB_ROOT_PASSWORD no .env}
+    # Habilita Unicode completo, incluindo acentos, e a colação padrão do MySQL 8.
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_0900_ai_ci"]
+    # Volumes mantêm dados depois que um container é recriado.
+    volumes:
+      # O volume nomeado recebe o diretório em que o MySQL grava as tabelas.
+      - mysql_data:/var/lib/mysql
+    # A prontidão é confirmada com uma consulta, e não só pela existência do processo.
+    healthcheck:
+      # $$ adia a expansão para o container; MYSQL_PWD evita pôr a senha em argumentos.
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_ROOT_PASSWORD mysql -h 127.0.0.1 -u root -e 'SELECT 1' >/dev/null"]
+      # Repete a verificação a cada cinco segundos.
+      interval: 5s
+      # Cada consulta pode esperar no máximo cinco segundos.
+      timeout: 5s
+      # Tolera o tempo de criação inicial do banco antes de declarar falha.
+      retries: 30
+    # Banco acessível somente na rede interna do Compose.
+  # Serviço HTTP que renderiza as páginas e acessa o banco pela rede interna.
+  web:
+    # Nome local da imagem construída a partir do código deste repositório.
+    image: tentativa-ouvidoria:dev
+    # O ponto indica que o Dockerfile está na pasta atual do projeto.
+    build: .
+    # Aplica a mesma política de reinício usada no banco.
+    restart: unless-stopped
+    # Instala um processo init pequeno para encaminhar sinais e encerrar filhos.
+    init: true
+    # Injeta configurações privadas em execução, sem copiá-las para a imagem.
+    env_file: .env
+    # Estas opções sobrescrevem apenas o endereço do banco dentro do container.
+    environment:
+      # db é o nome DNS interno do serviço definido acima.
+      DB_HOST: db
+      # 3306 é a porta do MySQL dentro da rede privada do Compose.
+      DB_PORT: 3306
+      # Garante que este fluxo use MySQL, mesmo se o .env local citar SQLite.
+      DB_ENGINE: mysql
+    # Mapeia somente a porta do site para o computador anfitrião.
+    ports:
+      # O bind em 127.0.0.1 evita exposição pública; WEB_PORT permite trocar a porta local.
+      - "127.0.0.1:${WEB_PORT:-8000}:8000"
+    # Impede iniciar o site antes que o banco esteja pronto para consultas.
+    depends_on:
+      # Identifica o serviço aguardado.
+      db:
+        # A condição se refere ao healthcheck do banco, não apenas ao estado Running.
+        condition: service_healthy
+# Declara os volumes persistentes administrados pelo Compose.
+volumes:
+  # Este volume é preservado por docker compose down, desde que não se use -v.
+  mysql_data:
